@@ -1,8 +1,7 @@
 
 # 📸 Pexels Clone
 
-Questo progetto è un **clone di Pexels** che permette di cercare e visualizzare foto e video utilizzando l'**API di Pexels**.  
-L'interfaccia è stata sviluppata con **HTML5**, **JavaScript** e **CSS**, ed è completamente **responsive** per tutti i dispositivi.
+Questo progetto è un **clone di Pexels** che permette di cercare e visualizzare foto e video utilizzando l'**API di Pexels**. L'interfaccia è stata sviluppata con **HTML5**, **JavaScript** e **CSS**, ed è completamente **responsive** per tutti i dispositivi.
 
 <p align="center">
     <img src="img/cover.jpg" alt="Cover" width="100%" />
