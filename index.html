@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <!-- Meta tags e link risorse esterne -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone Pexels</title>
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg">
+    <link rel="canonical" href="https://4-java-script-advanced-ch-4.vercel.app/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Clone Pexels - Foto e Video Gratuiti">
+    <meta name="twitter:description"
+        content="Scopri e scarica le migliori foto e video gratuiti condivisi dai creator su Clone Pexels.">
+    <meta name="twitter:image" content="img/cover.jpg">
+    <meta name="twitter:image:alt" content="Clone Pexels Cover Image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header con navigazione -->
+    <header>
+        <nav>
+            <a href="/" class="logo" style="text-decoration: none;">
+                <img src="img/logo.svg" alt="Logo">
+                <span>Clone Pexels</span>
+            </a>
+            <div class="nav-links">
+                <a href="#" class="btn">Esplora</a>
+                <a href="#" class="btn">Accedi</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenuto principale -->
+    <main>
+        <!-- Hero section con barra di ricerca -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Le foto gratuite, immagini e video migliori condivisi dai creator.</h1>
+                <div class="search-container">
+                    <div class="search-bar-hero">
+                        <select id="contentType">
+                            <option value="photos">Foto</option>
+                            <option value="videos">Video</option>
+                        </select>
+                        <input type="text" placeholder="Cerca foto e video gratuiti">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Griglia immagini/video -->
+        <div class="image-grid" id="imageGrid"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Clone Pexels. Tutti i diritti riservati.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
