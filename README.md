@@ -10,55 +10,86 @@ Questo progetto è un **clone di Pexels** che permette di cercare e visualizzare
 ---
 
 ## 📌 Funzionalità Principali
-- 🔍 **Ricerca contenuti**: Gli utenti possono cercare foto e video di alta qualità.
-- 🖼️ **Visualizzazione contenuti**: Layout a griglia con effetti hover moderni.
-- 📥 **Download**: Possibilità di scaricare i contenuti in diverse qualità.
-- 💫 **Modal interattivo**: Visualizzazione dettagliata con contenuti correlati.
-- 🎥 **Supporto video**: Integrazione completa di foto e video nella ricerca.
-- 📱 **Design responsive**: Layout ottimizzato per mobile, tablet e desktop.
+- 🔍 **Ricerca avanzata**: Ricerca foto e video con filtri dinamici
+- 🖼️ **Visualizzazione contenuti**: Layout a griglia con effetti hover moderni
+- 📥 **Download multipli**: Opzioni di download in diverse qualità
+- 💫 **Modal interattivo**: Preview dettagliata con informazioni complete
+- 🏷️ **Tag correlati**: Suggerimenti di ricerca basati sui contenuti
+- 🔄 **Contenuti simili**: Suggerimenti personalizzati sotto ogni contenuto
+- 📱 **Design responsive**: Ottimizzato sia per mobile (<728px) che desktop (>1028px)
+- 🌐 **Condivisione social**: Integrazione con i principali social network
+
+---
+
+## 🎯 Miglioramenti Recenti
+- ✨ **Layout migliorato**: Allineamento social icons ottimizzato
+- 🏷️ **Tag dinamici**: Suggerimenti correlati al contenuto visualizzato
+- 📱 **Responsive ottimizzato**: Breakpoint raffinati per una migliore esperienza
+- 🔍 **UX migliorata**: Navigazione più intuitiva e fluida
+- 💡 **Suggerimenti di ricerca**: Tag correlati per scoprire nuovi contenuti
+- 🎨 **UI pulita**: Interfaccia minimalista e moderna
 
 ---
 
 ## 🚀 Tecnologie Utilizzate
-- **HTML5** - Struttura semantica della pagina.
-- **CSS3** - Stile moderno e animazioni fluide.
-- **JavaScript (ES6+)** - Logica di interazione e gestione API.
-- **Fetch API** - Per le chiamate all'API di Pexels.
-- **Pexels API** - Fonte dei contenuti multimediali.
-- **Font Awesome** - Set di icone moderne.
+- **HTML5** - Struttura semantica e accessibile
+- **CSS3** - Stile moderno con flexbox e grid
+- **JavaScript (ES6+)** - Gestione API e interazioni utente
+- **Fetch API** - Integrazione API Pexels
+- **Font Awesome 6.0** - Iconografia moderna
+- **Google Fonts** - Font Inter per una tipografia pulita
 
 ---
 
-## 📌 Struttura del Progetto
-📂 **index.html** - Struttura principale della pagina  
-📂 **styles.css** - Stili generali e responsive  
-📂 **modal.css** - Stili specifici per il modal  
-📂 **script.js** - Logica JavaScript e integrazione API  
+## 📂 Struttura del Progetto
+```
+├── 📄 index.html     # Struttura principale
+├── 📄 styles.css     # Stili generali
+├── 📄 modal.css      # Stili modal e overlays
+├── 📄 script.js      # Logica JavaScript
+└── 📁 img/          # Assets e risorse
+```
 
 ---
 
 ## ⚙️ Funzionalità Dettagliate
-- **Ricerca avanzata**: Filtro per tipo di contenuto (foto/video)
-- **Modal interattivo**: Preview dettagliata con info fotografo
-- **Contenuti correlati**: Suggerimenti basati sulla visualizzazione corrente
-- **Download multipli**: Opzioni di qualità per ogni contenuto
-- **Infinite scroll**: Caricamento dinamico dei contenuti
-- **Condivisione social**: Integrazione con i principali social network
+- **Modal interattivo**: 
+  - Preview HD dei contenuti
+  - Info complete sul creator
+  - Opzioni di download multiple
+  - Tag correlati cliccabili
+  - Contenuti simili suggeriti
+  
+- **Sistema di ricerca**:
+  - Filtro foto/video
+  - Suggerimenti dinamici
+  - Tag correlati
+  - Ricerca istantanea
+  
+- **UX ottimizzata**:
+  - Infinite scroll
+  - Loading states
+  - Transizioni fluide
+  - Responsive breakpoints ottimizzati
 
 ---
 
-## 🎯 Obiettivi del Progetto
-👉 Implementare un'interfaccia **moderna e responsive**  
-👉 Ottimizzare le **chiamate API** e la gestione dei dati  
-👉 Creare un'esperienza utente **fluida e intuitiva**  
-👉 Fornire funzionalità di **ricerca e filtro avanzate**  
+## 🔄 Aggiornamenti Futuri
+- [ ] Dark mode
+- [ ] Filtri avanzati per la ricerca
+- [ ] Sistema di collections
+- [ ] Area utente personalizzata
+- [ ] Ottimizzazione performance
 
 ---
 
 ## 🤝 Contributi
-Contributi e suggerimenti sono benvenuti! Apri una **issue** per proporre miglioramenti.
+Il progetto è aperto a contributi! Sentiti libero di proporre miglioramenti aprendo una issue.
 
 ---
 
+## 👤 Autore
+[Henry](https://github.com/henry8913)
+
 ## 📝 Licenza
-Questo progetto è distribuito con licenza MIT. Vedere il file `LICENSE` per maggiori informazioni.
+Distribuito sotto licenza MIT. Vedere `LICENSE` per maggiori informazioni.

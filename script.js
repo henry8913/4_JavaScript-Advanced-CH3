@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let isLoading = false;
     let currentQuery = '';
     let currentType = 'photos';
-    
-    // Funzioni per il recupero dei contenuti da API
+
+    // Funzioni per recupero contenuti API
     async function fetchContent(query = '', page = 1, type = 'photos') {
         let url = type === 'photos' 
             ? query ? `https://api.pexels.com/v1/search?query=${query}&per_page=15&page=${page}`
                    : `https://api.pexels.com/v1/curated?per_page=15&page=${page}`
             : query ? `https://api.pexels.com/videos/search?query=${query}&per_page=15&page=${page}`
                    : `https://api.pexels.com/videos/popular?per_page=15&page=${page}`;
-            
+
         const response = await fetch(url, {
             headers: { 'Authorization': API_KEY }
         });
@@ -23,22 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return type === 'photos' ? data.photos : data.videos;
     }
 
-    // Visualizzazione dei contenuti nella griglia
+    // Visualizzazione contenuti nella griglia
     async function displayContent(query = '', reset = false, type = 'photos') {
         if (reset) {
             imageGrid.innerHTML = '';
             currentPage = 1;
+            const titleElement = document.getElementById('dynamicTitle');
+            if (query) {
+                titleElement.textContent = `${type === 'photos' ? 'Foto' : 'Video'} di ${query}`;
+            } else {
+                titleElement.textContent = `${type === 'photos' ? 'Foto' : 'Video'} di Ultime Tendenze`;
+            }
         }
-        
+
         isLoading = true;
         currentQuery = query;
         currentType = type;
         const content = await fetchContent(query, currentPage, type);
-        
+
         content.forEach(item => {
             const card = document.createElement('div');
             card.className = 'image-card';
-            
+
             if (type === 'photos') {
                 const img = document.createElement('img');
                 img.src = item.src.large;
@@ -78,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 window.open(type === 'photos' ? item.src.original : item.video_files[0].link, '_blank');
             });
-            
+
             card.addEventListener('click', () => {
                 if (type === 'photos') {
                     showPhotoModal(item);
@@ -86,15 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     showVideoModal(item);
                 }
             });
-            
+
             imageGrid.appendChild(card);
         });
-        
+
         isLoading = false;
         currentPage++;
     }
 
-    // Gestione del modal per le foto
+    // Gestione modal foto
     function showPhotoModal(photo) {
         const modal = document.createElement('div');
         modal.className = 'modal';
@@ -130,31 +136,48 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="social-button"><i class="fab fa-twitter"></i></div>
                         <div class="social-button"><i class="fab fa-pinterest"></i></div>
                     </div>
+                    <h4 style="margin: 15px 0 10px;">Altro simile a questo</h4>
+                    <div class="related-tags"></div>
+                    <div class="related-content"></div>
                 </div>
-                <div class="related-content"></div>
             </div>
         `;
-        
+
         document.body.appendChild(modal);
         modal.style.display = 'block';
-        
+
+        const relatedTags = generateRelatedTags(photo.alt);
+        const tagsContainer = modal.querySelector('.related-tags');
+        relatedTags.forEach(tag => {
+            const tagElement = document.createElement('div');
+            tagElement.className = 'related-tag';
+            tagElement.textContent = tag;
+            tagElement.onclick = () => {
+                modal.remove();
+                displayContent(tag, true, 'photos');
+                const titleElement = document.getElementById('dynamicTitle');
+                titleElement.scrollIntoView({ behavior: 'smooth' });
+            };
+            tagsContainer.appendChild(tagElement);
+        });
+
         modal.querySelector('.close-modal').onclick = () => {
             modal.remove();
         };
-        
+
         const downloadBtn = modal.querySelector('.download-button');
         const qualityOptions = modal.querySelector('.quality-options');
         downloadBtn.onclick = () => {
             qualityOptions.classList.toggle('show');
         };
-        
+
         qualityOptions.querySelectorAll('.quality-option').forEach(option => {
             option.onclick = () => {
                 window.open(option.dataset.url, '_blank');
                 qualityOptions.classList.remove('show');
             };
         });
-        
+
         fetchContent(photo.photographer, 1, 'photos').then(photos => {
             const relatedContent = modal.querySelector('.related-content');
             photos.slice(0, 6).forEach(relatedPhoto => {
@@ -163,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const thumb = document.createElement('img');
                 thumb.src = relatedPhoto.src.medium;
                 thumb.alt = relatedPhoto.photographer;
-                
+
                 const info = document.createElement('div');
                 info.className = 'image-info';
                 info.innerHTML = `
@@ -180,10 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 `;
-                
+
                 card.appendChild(thumb);
                 card.appendChild(info);
-                
+
                 card.onclick = (e) => {
                     if (!e.target.closest('.image-actions')) {
                         e.stopPropagation();
@@ -191,18 +214,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         showPhotoModal(relatedPhoto);
                     }
                 };
-                
+
                 info.querySelector('.download').onclick = (e) => {
                     e.stopPropagation();
                     window.open(relatedPhoto.src.original, '_blank');
                 };
-                
+
                 relatedContent.appendChild(card);
             });
         });
     }
 
-    // Gestione del modal per i video
+    // Gestione modal video
     function showVideoModal(video) {
         const modal = document.createElement('div');
         modal.className = 'modal';
@@ -223,22 +246,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="social-button"><i class="fab fa-twitter"></i></div>
                         <div class="social-button"><i class="fab fa-pinterest"></i></div>
                     </div>
+                    <h4 style="margin: 15px 0 10px;">Altro simile a questo</h4>
+                    <div class="related-tags"></div>
+                    <div class="related-content"></div>
                 </div>
-                <div class="related-content"></div>
             </div>
         `;
-        
+
         document.body.appendChild(modal);
         modal.style.display = 'block';
-        
+
         modal.querySelector('.close-modal').onclick = () => {
             modal.remove();
         };
-        
+
         modal.querySelector('.download-button').onclick = () => {
             window.open(video.video_files[0].link, '_blank');
         };
-        
+
         fetchContent(video.user.name, 1, 'videos').then(videos => {
             const relatedContent = modal.querySelector('.related-content');
             videos.slice(0, 6).forEach(relatedVideo => {
@@ -254,32 +279,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gestione scroll infinito
     function handleScroll() {
         if (isLoading) return;
-        
+
         const scrollHeight = document.documentElement.scrollHeight;
         const scrollTop = window.scrollY;
         const clientHeight = window.innerHeight;
-        
+
         if (scrollTop + clientHeight >= scrollHeight - 800) {
             displayContent(currentQuery, false, currentType);
         }
     }
 
-    // Gestione click sul fotografo
-    function handlePhotographerClick(photographer) {
-        document.querySelector('.modal').remove();
-        displayContent(photographer, true, 'photos');
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    displayContent();
-
     // Gestione ricerca
     const searchInputs = document.querySelectorAll('input[type="text"]');
     const contentTypeSelect = document.getElementById('contentType');
-    
+
     function handleSearch(query) {
         const contentType = contentTypeSelect.value;
         displayContent(query, true, contentType);
+        const titleElement = document.getElementById('dynamicTitle');
+        titleElement.scrollIntoView({ behavior: 'smooth' });
     }
 
     searchInputs.forEach(input => {
@@ -296,4 +314,12 @@ document.addEventListener('DOMContentLoaded', () => {
             handleSearch(input.value);
         });
     });
+
+    window.addEventListener('scroll', handleScroll);
+    displayContent();
 });
+
+function generateRelatedTags(altText) {
+    const tags = altText.toLowerCase().split(' ').filter(word => word.length > 2);
+    return [...new Set(tags)];
+}
